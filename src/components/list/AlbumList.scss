@@ -1,0 +1,10 @@
+.album-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+
+    .album-item {
+        width: 300px;
+        height: 300px;
+    }
+}
