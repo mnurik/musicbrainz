@@ -3,13 +3,10 @@ import $ from 'jquery';
 
 import "./AlbumForm.css";
 
-export default ({ saveAlbum }) => {
-    let search;
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        saveAlbum(search.value);
-        event.target.reset();
+export default ({ fetchAlbums, getAllAlbums }) => {
+    const getData = ({ target }) => {
+        if (target.value === "") fetchAlbums()
+        else getAllAlbums(target.value);
     }
 
     const toggle = () => {
@@ -17,11 +14,11 @@ export default ({ saveAlbum }) => {
     }
 
     return (
-        <form className="search" onSubmit={handleSubmit}>
-            <input type="search" className="search-box" ref={(node) => { search = node }} />
+        <div className="search">
+            <input type="search" className="search-box" onChange={getData} />
             <span className="search-button" onClick={() => toggle()}>
                 <span className="search-icon"></span>
             </span>
-        </form>
+        </div>
     )
 };

@@ -1,30 +1,38 @@
-import { getAlbumsService, createAlbumService, deleteAlbumService } from "./../utils/services";
+import { getAlbumsService, createAlbumService, deleteAlbumService, getAllAlbumsService } from "./../utils/services";
 
 export const ALBUMS_LOAD = 'ALBUMS_LOAD';
 export const ADD_ALBUM = 'ADD_ALBUM';
 export const DELETE_ALBUM = 'DELETE_ALBUM';
 
-export const loadAlbums = (albums) => ({ type: ALBUMS_LOAD, payload: albums });
-export const addAlbum = (album) => ({ type: ADD_ALBUM, payload: album });
-export const removeAlbum = (id) => ({ type: DELETE_ALBUM, payload: id });
+export const loadAlbumsAction = (albums) => ({ type: ALBUMS_LOAD, payload: albums });
+export const addAlbumAction = (album) => ({ type: ADD_ALBUM, payload: album });
+export const deleteAlbumAction = (id) => ({ type: DELETE_ALBUM, payload: id });
+export const getAllAlbumsAction = (albums) => ({ type: ALBUMS_LOAD, payload: albums });
 
 export const fetchAlbums = () => {
     return (dispatch) => {
         getAlbumsService()
-            .then(albums => dispatch(loadAlbums(albums)))
+            .then(albums => dispatch(loadAlbumsAction(albums)))
     }
 };
 
 export const saveAlbum = (name) => {
     return (dispatch) => {
         createAlbumService(name)
-            .then(album => dispatch(addAlbum(album)))
+            .then(album => dispatch(addAlbumAction(album)))
     }
 };
 
 export const deleteAlbum = (id) => {
     return (dispatch) => {
         deleteAlbumService(id)
-            .then(() => dispatch(removeAlbum(id)))
+            .then(() => dispatch(deleteAlbumAction(id)))
+    }
+};
+
+export const getAllAlbums = (name) => {
+    return (dispatch) => {
+        getAllAlbumsService(name)
+            .then(() => dispatch(getAllAlbumsAction()))
     }
 };

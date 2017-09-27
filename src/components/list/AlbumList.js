@@ -1,9 +1,9 @@
 import React from 'react';
 import './AlbumList.css';
 
-export default ({ id, name, deleteAlbumItem }) => (
+export default ({ id, name, deleteAlbum }) => (
     <div className="album-item">
         {name}
-        <span className="delete-album" onClick={() => deleteAlbumItem(id)}>delete</span>
+        <span className="delete-album" onClick={() => deleteAlbum(id)}>delete</span>
     </div>
 );

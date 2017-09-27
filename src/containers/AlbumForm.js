@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Form from "./../components/form/AlbumForm";
-import { saveAlbum } from "./../actions/actions";
+import { getAllAlbums, fetchAlbums } from "./../actions/actions";
 
 class AlbumForm extends Component {
 
     render() {
-        const { saveAlbum } = this.props;
-        return <Form saveAlbum={saveAlbum} />
+        const { getAllAlbums, fetchAlbums } = this.props;
+        return <Form getAllAlbums={getAllAlbums} fetchAlbums={fetchAlbums} />
     }
 };
 
-export default connect((state) => ({ ...state }), { saveAlbum })(AlbumForm);
+export default connect((state) => state, { getAllAlbums, fetchAlbums })(AlbumForm);

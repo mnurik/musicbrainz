@@ -1,6 +1,6 @@
 export const getAlbumsService = () => {
     return fetch('http://localhost:8080/albums')
-        .then(res => res.json())
+        .then(res => res.json());
 };
 
 export const createAlbumService = (name) => {
@@ -23,4 +23,9 @@ export const deleteAlbumService = (id) => {
             'Content-Type': 'application/json'
         }
     });
+};
+
+export const getAllAlbumsService = (name) => {
+    return fetch('https://musicbrainz.org/ws/2/')
+        .then(res => res.json());
 };
