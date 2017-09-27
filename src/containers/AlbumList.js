@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { fetchAlbums, deleteAlbum } from './../actions/albums';
+import { fetchAlbums, deleteAlbum } from './../actions/actions';
 import List from './../components/list/AlbumList';
 
 class AlbumList extends Component {

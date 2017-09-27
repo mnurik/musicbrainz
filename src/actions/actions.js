@@ -1,4 +1,4 @@
-import { getAlbumsService, createAlbumService, deleteAlbumService } from "./../utils/albumServices";
+import { getAlbumsService, createAlbumService, deleteAlbumService } from "./../utils/services";
 
 export const ALBUMS_LOAD = 'ALBUMS_LOAD';
 export const ADD_ALBUM = 'ADD_ALBUM';

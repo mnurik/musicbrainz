@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Form from "./../components/form/AlbumForm";
-import { saveAlbum } from "./../actions/albums";
+import { saveAlbum } from "./../actions/actions";
 
 class AlbumForm extends Component {
 
