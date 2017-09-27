@@ -1,4 +1,26 @@
-export const getAlbums = () => {
-    return fetch('http://musicbrainz.org/ws/2/artist/5b11f4ce-a62d-471e-81fc-a69a8278c7da?inc=aliases&fmt=json')
+export const getAlbumsService = () => {
+    return fetch('http://localhost:8080/albums')
         .then(res => res.json())
+};
+
+export const createAlbumService = (name) => {
+    return fetch('http://localhost:8080/albums', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name: name })
+    })
+        .then(res => res.json());
+};
+
+export const deleteAlbumService = (id) => {
+    return fetch(`http://localhost:8080/albums/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    });
 };

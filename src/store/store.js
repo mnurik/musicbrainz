@@ -1,8 +1,12 @@
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
 import thunk from 'redux-thunk';
 import albumReducer from './../reducer/albums';
 
+const reducer = combineReducers({
+    albums: albumReducer
+});
+
 export default createStore(
-    albumReducer,
+    reducer,
     applyMiddleware(thunk)
 );
