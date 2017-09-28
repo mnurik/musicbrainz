@@ -33,9 +33,13 @@ export const deleteAlbum = (id) => {
 
 export const getAllAlbums = (name) => {
     return (dispatch) => {
+        // Here i called first get local albums, then after success response called get albums from MusicBrainz api.
+        // The reason for doing that is, to get know if album exist inside local db.
         getAlbumsService()
-            .then(albums => dispatch(loadAlbumsAction(albums)));
-        getAllAlbumsService(name)
+            .then(albums => {
+                dispatch(loadAlbumsAction(albums));
+                return getAllAlbumsService(name);
+            })
             .then(albums => dispatch(allAlbumsLoadAction(albums)))
     }
 };
