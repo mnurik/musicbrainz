@@ -16,10 +16,17 @@
             margin: 5px;
         }
 
-        .delete-album {
-            text-decoration: underline;
-            display: block;
+        i {
             cursor: pointer;
+            font-style: normal;
+
+            &:before {
+                margin-right: 5px;
+            }
+        }
+
+        img {
+            width: 200px;
         }
     }
 }

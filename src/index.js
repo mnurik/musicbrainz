@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
 import App from './app/App';
 import store from './store/store';
+
+import './index.css';
+import "font-awesome/css/font-awesome.css";
 
 ReactDOM.render(
     <Provider store={store}>
@@ -13,4 +15,5 @@ ReactDOM.render(
     </Provider>,
     document.getElementById('root')
 );
+
 registerServiceWorker();

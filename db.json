@@ -1,28 +1,19 @@
 {
   "albums": [
     {
-      "name": "asdas",
-      "id": 1
+      "id": "d11ae21e-999f-4193-a3e7-fe27baf9d538",
+      "name": "L. Hamilton",
+      "saved": true
     },
     {
-      "name": "sdasd",
-      "id": 2
+      "id": "85adc71a-9dfd-410d-b1ca-aac315bac6eb",
+      "name": "A.S.",
+      "saved": true
     },
     {
-      "name": "asds",
-      "id": 9
-    },
-    {
-      "name": "dsfsd",
-      "id": 13
-    },
-    {
-      "name": "fdsfds",
-      "id": 14
-    },
-    {
-      "name": "asdasd",
-      "id": 15
+      "id": "d4c7e67f-202a-4648-9047-71a18481ec8d",
+      "name": "Aś",
+      "saved": true
     }
   ]
 }
