@@ -13,16 +13,9 @@ import './AlbumList.css';
  * @prop saveAlbum -> dispatch an action for saving album to local db.
  */
 
-export default ({ id, name, saved, undo, deleteAlbum, saveAlbum }) => (
+export const AlbumList = ({ name, children }) => (
     <div className="album-item">
-        <img src="./album.jpg" alt="Album Title" />
-        {name}
-        {
-            saved ?
-                <i className="fa fa-trash" onClick={() => deleteAlbum(id)}>delete</i>
-                : <i className={undo ? "fa fa-undo" : "fa fa-plus"} onClick={() => saveAlbum(id, name)}>
-                    {undo ? "undo" : "save"}
-                </i>
-        }
+        <img src="./album.jpg" alt="Album Title" className="album-image" />
+        {name} {children}
     </div>
 );

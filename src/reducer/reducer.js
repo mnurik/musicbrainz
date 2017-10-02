@@ -1,30 +1,30 @@
-import { ALBUMS_LOAD, ADD_ALBUM, DELETE_ALBUM, ALL_ALBUMS_LOAD } from "./../actions/actions";
+import * as actions from "./../actions/actions";
 
-export default (state = [], action) => {
+export const initialState = {
+    localAlbums: [],
+    globalAlbums: [],
+    currentAlbum: "",
+    errorMessage: ""
+};
+
+export default (state = initialState, action) => {
     switch (action.type) {
-        case ALBUMS_LOAD:
+        case actions.ALBUMS_LOAD:
             // Initial load. Also when user clear search input. 
-            return action.payload;
-        case ADD_ALBUM:
-            // Add new album to local db without mutating, replace with clicked album.     
-            let index = state.findIndex(album => album.id === action.payload.id);
-            return [
-                ...state.slice(0, index),
-                action.payload,
-                ...state.slice(index + 1)
-            ];
-        case DELETE_ALBUM:
-            // When delete album from list give a chance to undo remove process.   
-            return state.map(album => album.id !== action.payload ? album
-                : Object.assign({}, album, { saved: false, undo: true })
-            );
-        case ALL_ALBUMS_LOAD:
-            // Here I check if album exist inside my local db. If album exist, take from local.    
-            return action.payload
-                .map(album => {
-                    let index = state.findIndex(savedAlbum => savedAlbum.id === album.id);
-                    return ~index ? state[index] : album;
-                });
+            return { ...state, localAlbums: action.payload };
+        case actions.ADD_ALBUM:
+            // Add new album to local db without mutating, replace with clicked album.
+            return { ...state, localAlbums: state.localAlbums.concat([action.payload]) };
+        case actions.DELETE_ALBUM:
+            // Delete album from local db.   
+            return { ...state, localAlbums: state.localAlbums.filter(album => album.id !== action.payload) };
+        case actions.ALL_ALBUMS_LOAD:
+            // Get all albums from MusicBrainz.    
+            return { ...state, globalAlbums: action.payload };
+        case actions.CURRENT_ALBUM_UPDATED:
+            return { ...state, currentAlbum: action.payload };
+        case actions.REQUEST_FAILURE:
+            return { ...state, errorMessage: action.payload };
         default:
             return state;
     }

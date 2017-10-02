@@ -1,29 +1,19 @@
 {
   "albums": [
     {
-      "id": "d11ae21e-999f-4193-a3e7-fe27baf9d538",
-      "name": "L. Hamilton",
-      "saved": true
+      "id": "f59c5520-5f46-4d2c-b2c4-822eabf53419",
+      "name": "Linkin Park",
+      "local": true
     },
     {
-      "id": "85adc71a-9dfd-410d-b1ca-aac315bac6eb",
-      "name": "A.S.",
-      "saved": true
+      "id": "7921bc29-f896-4555-b4ae-82700ffe91c2",
+      "name": "Üzeyir Hacıbəyov",
+      "local": true
     },
     {
-      "id": "d4c7e67f-202a-4648-9047-71a18481ec8d",
-      "name": "Aś",
-      "saved": true
-    },
-    {
-      "id": "868f7043-9de6-4b62-af8c-fcceb16b4bd6",
-      "name": "A Sonic Deterrent",
-      "saved": true
-    },
-    {
-      "id": "4af324c6-0a7c-4c84-b7ce-c60ffe4a8f33",
-      "name": "Wilhelm Friedemann Bach",
-      "saved": true
+      "id": "061600f4-b814-49a7-842e-d62ff88da215",
+      "name": "Musa",
+      "local": true
     }
   ]
 }

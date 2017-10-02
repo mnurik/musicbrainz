@@ -12,11 +12,11 @@
         justify-content: center;
         flex-direction: column;
 
-        & > * {
+        & > .fa, & > .album-image {
             margin: 5px;
         }
 
-        i {
+        i.fa {
             cursor: pointer;
             font-style: normal;
 
@@ -25,7 +25,7 @@
             }
         }
 
-        img {
+        img.album-image {
             width: 200px;
         }
     }

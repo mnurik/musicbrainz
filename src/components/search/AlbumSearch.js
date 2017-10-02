@@ -14,32 +14,33 @@ import "./AlbumSearch.css";
  * @method toggleClass -> As jquery toggleClass, toggles class when user click on search-button.
  */
 
-export default class extends Component {
+export class AlbumSearch extends Component {
     constructor(props) {
         super(props);
-        this.getData = this.getData.bind(this);
-        this.toggleClass = this.toggleClass.bind(this);
         this.state = { active: false };
     }
 
-    getData({ target }) {
-        if (target.value === "") this.props.fetchAlbums()
-        else this.props.getAllAlbums(target.value);
+    getData = ({ target }) => {
+        let value = target.value || "\'\'";
+        this.props.currentAlbum(value);
     }
 
-    toggleClass() {
+    toggleClass = () => {
         this.setState(prevState => ({ active: !prevState.active }))
     }
 
     render() {
         return (
-            <div className={`search ${this.state.active ? 'open' : ''}`}>
-                <Debounce time="600" handler="onChange">
-                    <input type="search" className="search-box" onChange={this.getData} />
-                </Debounce>
-                <span className="search-button" onClick={this.toggleClass}>
-                    <span className="search-icon"></span>
-                </span>
+            <div>
+                <div className={`search ${this.state.active ? 'open' : ''}`}>
+                    <Debounce time="600" handler="onChange">
+                        <input type="search" className="search-box" onChange={this.getData} />
+                    </Debounce>
+                    <span className="search-button" onClick={this.toggleClass}>
+                        <span className="search-icon"></span>
+                    </span>
+                </div>
+                <span className="error-message">{this.props.children}</span>
             </div>
         )
     }
