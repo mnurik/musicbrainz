@@ -4,7 +4,7 @@ export const initialState = {
     localAlbums: [],
     globalAlbums: [],
     currentAlbum: "",
-    errorMessage: ""
+    errorMessage: null
 };
 
 export default (state = initialState, action) => {
@@ -23,6 +23,8 @@ export default (state = initialState, action) => {
             return { ...state, globalAlbums: action.payload };
         case actions.CURRENT_ALBUM_UPDATED:
             return { ...state, currentAlbum: action.payload };
+        case actions.REQUEST_SUCCESS:
+            return { ...state, errorMessage: null };
         case actions.REQUEST_FAILURE:
             return { ...state, errorMessage: action.payload };
         default:

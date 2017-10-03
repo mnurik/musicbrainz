@@ -6,13 +6,12 @@ import { getAllAlbums } from "./../utils/services";
 import { currentAlbumUpdate } from "./../actions/actions";
 
 const AlbumSearchContainer = (props) => {
-
-    const currentAlbum = (value) => {
-        props.currentAlbumUpdate(value);
-        props.getAllAlbums(value);
-    };
-
-    return <AlbumSearch currentAlbum={currentAlbum} >{props.errorMessage.message}</AlbumSearch>;
+    return <AlbumSearch
+        currentAlbumUpdate={props.currentAlbumUpdate}
+        currentAlbum={props.currentAlbum}
+        getAllAlbums={props.getAllAlbums}
+        errorMessage={props.errorMessage}
+    />;
 };
 
 export default connect((state) => ({

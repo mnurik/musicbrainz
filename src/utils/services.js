@@ -14,11 +14,14 @@ export function parseJSON(response) {
     return response.json();
 };
 
-export function callApi(url, config, onRequestSuccess) {
+export function callApi(url, config, request) {
     return (dispatch) => fetch(url, config)
         .then(checkStatus)
         .then(parseJSON)
-        .then(response => dispatch(onRequestSuccess(response)))
+        .then(response => {
+            dispatch(actions.onRequestSuccess());
+            dispatch(request(response));
+        })
         .catch(error => {
             const response = error.response;
             if (response === undefined) {
@@ -39,7 +42,7 @@ export function callApi(url, config, onRequestSuccess) {
         });
 };
 
-export const fetchAlbums = () => callApi('http://localhost:8080/albums', {}, actions.loadAlbumsAction);
+export const fetchAlbums = () => callApi('http://localhost:8080/albums', {}, actions.loadAlbums);
 
 export const saveAlbum = (id, name) => {
     return callApi('http://localhost:8080/albums', {
@@ -49,7 +52,7 @@ export const saveAlbum = (id, name) => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ id: id, name: name, local: true })
-    }, actions.addAlbumAction);
+    }, actions.addAlbum);
 };
 
 export const deleteAlbum = (id) => {
@@ -59,10 +62,10 @@ export const deleteAlbum = (id) => {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
-    }, () => actions.deleteAlbumAction(id));
+    }, () => actions.deleteAlbum(id));
 };
 
 export const getAllAlbums = (name) => {
     // Get all albums from MusicBrainz Api.
-    return callApi(`http://musicbrainz.org/ws/2/artist?query=${name}&fmt=json`, {}, actions.allAlbumsLoadAction);
+    return callApi(`http://musicbrainz.org/ws/2/artist?query=${name || "''"}&fmt=json`, {}, actions.allAlbumsLoad);
 };

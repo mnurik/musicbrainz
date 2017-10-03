@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Debounce } from 'react-throttle';
 
 import "./AlbumSearch.css";
 
@@ -20,9 +19,13 @@ export class AlbumSearch extends Component {
         this.state = { active: false };
     }
 
-    getData = ({ target }) => {
-        let value = target.value || "\'\'";
-        this.props.currentAlbum(value);
+    handleInputChange = ({ target }) => {
+        this.props.currentAlbumUpdate(target.value);
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.props.getAllAlbums(this.props.currentAlbum);
     }
 
     toggleClass = () => {
@@ -30,17 +33,16 @@ export class AlbumSearch extends Component {
     }
 
     render() {
+        const { currentAlbum, errorMessage } = this.props;
         return (
             <div>
-                <div className={`search ${this.state.active ? 'open' : ''}`}>
-                    <Debounce time="600" handler="onChange">
-                        <input type="search" className="search-box" onChange={this.getData} />
-                    </Debounce>
+                <form onSubmit={this.handleSubmit} className={`search ${this.state.active ? 'open' : ''}`}>
+                    <input type="search" className="search-box" value={currentAlbum} onChange={this.handleInputChange} />
                     <span className="search-button" onClick={this.toggleClass}>
                         <span className="search-icon"></span>
                     </span>
-                </div>
-                <span className="error-message">{this.props.children}</span>
+                </form>
+                {errorMessage ? <span className="error-message">{errorMessage.message}</span> : null}
             </div>
         )
     }
