@@ -4,7 +4,7 @@ import { Provider } from 'react-redux'
 
 import registerServiceWorker from './registerServiceWorker';
 import App from './app/App';
-import store from './store/store';
+import store from './store';
 
 import './index.css';
 import "font-awesome/css/font-awesome.css";

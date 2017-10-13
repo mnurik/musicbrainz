@@ -1,20 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 
-import { AlbumSearch } from "./../components/search/AlbumSearch";
-import { getAllAlbums } from "./../utils/services";
-import { currentAlbumUpdate } from "./../actions/actions";
+import AlbumSearchForm from "./../components/AlbumSearchForm";
+import { currentAlbumUpdate } from "./../actions";
 
-const AlbumSearchContainer = (props) => {
-    return <AlbumSearch
-        currentAlbumUpdate={props.currentAlbumUpdate}
-        currentAlbum={props.currentAlbum}
-        getAllAlbums={props.getAllAlbums}
-        errorMessage={props.errorMessage}
-    />;
+class AlbumSearch extends Component {
+
+    render() {
+        return <AlbumSearchForm onGetAllAlbums={this.props.currentAlbumUpdate} />;
+    }
 };
 
-export default connect((state) => ({
-    currentAlbum: state.currentAlbum,
-    errorMessage: state.errorMessage
-}), { getAllAlbums, currentAlbumUpdate })(AlbumSearchContainer);
+const mapDispatchToProps = (dispatch) => ({
+    currentAlbumUpdate: bindActionCreators(currentAlbumUpdate, dispatch)
+});
+
+export default connect(state => state, mapDispatchToProps)(AlbumSearch);

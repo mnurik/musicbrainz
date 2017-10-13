@@ -1,5 +1,6 @@
 import React from 'react';
-import './AlbumList.css';
+import './style.css';
+import PropTypes from "prop-types";
 
 /**
  * List of Album
@@ -13,9 +14,16 @@ import './AlbumList.css';
  * @prop saveAlbum -> dispatch an action for saving album to local db.
  */
 
-export const AlbumList = ({ name, children }) => (
+const AlbumList = ({ name, children }) => (
     <div className="album-item">
         <img src="./album.jpg" alt="Album Title" className="album-image" />
         {name} {children}
     </div>
 );
+
+AlbumList.propTypes = {
+    name: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired
+};
+
+export default AlbumList;

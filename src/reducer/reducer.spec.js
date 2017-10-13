@@ -1,5 +1,5 @@
-import reducer from './reducer';
-import { ADD_ALBUM, DELETE_ALBUM } from "./../actions/actions";
+import reducer from './index';
+import { ADD_ALBUM, DELETE_ALBUM } from "./../actions";
 
 describe('Album Reducer', () => {
     test('returns a state object', () => {

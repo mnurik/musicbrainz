@@ -1,33 +1,64 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import _ from "lodash";
+import PropTypes from "prop-types";
 
-import { fetchAlbums, deleteAlbum, saveAlbum } from './../utils/services';
-import { AlbumList } from './../components/list/AlbumList';
+import * as services from './../utils/services';
+import { loadAlbums, deleteAlbum, addAlbum } from './../actions';
+import List from './../components/AlbumList';
 
-class AlbumListContainer extends Component {
+class AlbumList extends Component {
     componentDidMount() {
         // Fetch albums from local db when component mounted.
-        this.props.fetchAlbums();
+        services.fetchLocalAlbums()
+            .then(res => this.props.loadAlbums(res));
+    }
+
+    onDeleteAlbum = (id) => {
+        services.deleteAlbum(id)
+            .then(() => this.props.deleteAlbum(id));
+    }
+
+    onSaveAlbum = (id, name) => {
+        const data = { id, name, local: true };
+        services.saveAlbum(data)
+            .then(() => this.props.addAlbum(data));
     }
 
     render() {
-        const { globalAlbums, localAlbums, deleteAlbum, saveAlbum } = this.props;
+        const { globalAlbums, localAlbums } = this.props;
         return (
             <div className="album-list">
                 {
-                    _.unionBy(localAlbums, globalAlbums, "id").map(album => <AlbumList key={album.id} name={album.name}>
-                        {album.local ?
-                            <i className="fa fa-trash" onClick={() => deleteAlbum(album.id)}>delete</i>
-                            : <i className="fa fa-plus" onClick={() => saveAlbum(album.id, album.name)}>save</i>}
-                    </AlbumList>)
+                    _.sortBy(_.unionBy(localAlbums, globalAlbums, "id"), 'name')
+                        .map(album => (
+                            <List key={album.id} name={album.name}>
+                                {album.local ?
+                                    <i className="fa fa-trash" onClick={() => this.onDeleteAlbum(album.id)}>delete</i>
+                                    : <i className="fa fa-plus" onClick={() => this.onSaveAlbum(album.id, album.name)}>save</i>
+                                }
+                            </List>
+                        ))
                 }
             </div>
         );
     }
 };
 
-export default connect(state => ({
+AlbumList.contextTypes = {
+    store: PropTypes.object.isRequired
+};
+
+const mapStateToProps = (state) => ({
     globalAlbums: state.globalAlbums,
     localAlbums: state.localAlbums
-}), { fetchAlbums, deleteAlbum, saveAlbum })(AlbumListContainer);
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    loadAlbums: bindActionCreators(loadAlbums, dispatch),
+    deleteAlbum: bindActionCreators(deleteAlbum, dispatch),
+    addAlbum: bindActionCreators(addAlbum, dispatch)
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AlbumList);
