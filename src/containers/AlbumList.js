@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import _ from "lodash";
 import PropTypes from "prop-types";
 
@@ -29,14 +28,14 @@ class AlbumList extends Component {
     render() {
         const { globalAlbums, localAlbums } = this.props;
         return (
-            <div className="album-list">
+            <div className="album">
                 {
                     _.sortBy(_.unionBy(localAlbums, globalAlbums, "id"), 'name')
                         .map(album => (
                             <List key={album.id} name={album.name}>
                                 {album.local ?
-                                    <i className="fa fa-trash" onClick={() => this.onDeleteAlbum(album.id)}>delete</i>
-                                    : <i className="fa fa-plus" onClick={() => this.onSaveAlbum(album.id, album.name)}>save</i>
+                                    <i className="album__icon fa fa-trash" onClick={() => this.onDeleteAlbum(album.id)}>delete</i>
+                                    : <i className="album__icon fa fa-plus" onClick={() => this.onSaveAlbum(album.id, album.name)}>save</i>
                                 }
                             </List>
                         ))
@@ -55,10 +54,4 @@ const mapStateToProps = (state) => ({
     localAlbums: state.localAlbums
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    loadAlbums: bindActionCreators(loadAlbums, dispatch),
-    deleteAlbum: bindActionCreators(deleteAlbum, dispatch),
-    addAlbum: bindActionCreators(addAlbum, dispatch)
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AlbumList);
+export default connect(mapStateToProps, { loadAlbums, deleteAlbum, addAlbum })(AlbumList);

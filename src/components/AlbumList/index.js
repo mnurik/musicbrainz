@@ -15,8 +15,8 @@ import PropTypes from "prop-types";
  */
 
 const AlbumList = ({ name, children }) => (
-    <div className="album-item">
-        <img src="./album.jpg" alt="Album Title" className="album-image" />
+    <div className="album__item">
+        <img src="./album.jpg" alt="Album Title" className="album__image" />
         {name} {children}
     </div>
 );

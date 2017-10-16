@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { bindActionCreators } from "redux";
 import { connect } from 'react-redux';
 
 import AlbumSearchForm from "./../components/AlbumSearchForm";
@@ -12,8 +11,4 @@ class AlbumSearch extends Component {
     }
 };
 
-const mapDispatchToProps = (dispatch) => ({
-    currentAlbumUpdate: bindActionCreators(currentAlbumUpdate, dispatch)
-});
-
-export default connect(state => state, mapDispatchToProps)(AlbumSearch);
+export default connect(state => state, { currentAlbumUpdate })(AlbumSearch);

@@ -25,13 +25,13 @@ export default class AlbumSearch extends Component {
 
     render() {
         return (
-            <div className={`search ${this.state.active ? 'open' : ''}`}>
+            <div className={`search ${this.state.active ? 'search--open' : ''}`}>
                 <input type="search"
-                    className="search-box"
+                    className="search__box"
                     onChange={(event) => this.props.onGetAllAlbums(event.target.value)}
                 />
-                <span className="search-button" onClick={this.toggleClass}>
-                    <span className="search-icon"></span>
+                <span className="search__button" onClick={this.toggleClass}>
+                    <span className="search__icon"></span>
                 </span>
             </div>
         )
